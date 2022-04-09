@@ -2,35 +2,32 @@
 {
     static void Main(string[] args)
     {
-        string staples;
+        string parenthesisExpression;
         char openParenthesis = '(';
         char closeParenthesis = ')';
-        int openParenthesisCount = 0;
-        int closeParenthesisCount = 0;
-        int symbolsCount = 3;
+        int parenthesisScore = 0;
+        int maximumDepth = 0;
+        
+        parenthesisExpression = Console.ReadLine();
 
-        staples = Console.ReadLine();
-
-        foreach (char symbol in staples)
+        foreach (char symbol in parenthesisExpression)
         {
-            if (openParenthesis == symbol)
+            if(symbol == openParenthesis)
             {
-                openParenthesisCount++;
+                parenthesisScore++;
+                maximumDepth++;
             }
-            else if (closeParenthesis == symbol)
+            else if(symbol == closeParenthesis)
             {
-                closeParenthesisCount++;
+                parenthesisScore--;
             }
-            symbolsCount++;
+            
+            if (parenthesisScore < 0 && parenthesisScore != 0)
+            {
+                Console.WriteLine("Выражение не корректно!");
+                break;
+            }
         }
-
-        if (openParenthesisCount == closeParenthesisCount)
-        {
-            Console.WriteLine($"Скобочное выражение верное и его максимальная глубина равняется {openParenthesisCount}");
-        }
-        else
-        {
-            Console.WriteLine("Выражение не корректно");
-        }
+        Console.WriteLine($"Скобочное выражение корректно и его максимальная вложенность равна {maximumDepth}");
     }
 }
